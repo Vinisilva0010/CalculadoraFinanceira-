@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout } from '@/components/Layout';
 import { PricingSimulator } from '@/components/PricingSimulator';
 import { ReverseCalculator } from '@/components/ReverseCalculator';
@@ -56,6 +56,18 @@ export default function HomePage() {
   };
 
   /**
+   * useEffect para limpar edição após renderizar simulador
+   */
+  useEffect(() => {
+    if (editingData && activeTab === 'simulator') {
+      const timeout = setTimeout(() => {
+        clearEditingData();
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [editingData, activeTab]);
+
+  /**
    * Renderiza o conteúdo da tab ativa
    */
   const renderTabContent = () => {
@@ -67,10 +79,7 @@ export default function HomePage() {
               onCalculate={handleCalculation}
               initialData={editingData || undefined}
             />
-            
-            {/* Limpar dados de edição após renderizar */}
-            {editingData && setTimeout(clearEditingData, 100)}
-            
+
             {/* Gráficos */}
             {chartsData && (
               <Charts
