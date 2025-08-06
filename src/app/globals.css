@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animações personalizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Classes utilitárias personalizadas */
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Estilos base para melhor acessibilidade */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Melhor contraste para foco */
+  button:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+  
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Estilo para inputs inválidos */
+  input:invalid {
+    @apply border-red-300;
+  }
+  
+  /* Remove outline padrão em elementos com foco via mouse */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+}
+
+/* Estilos para componentes de gráfico */
+.chart-container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+/* Estilos para tabelas responsivas */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Estilos para cards hover */
+.card-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para loading states */
+.loading-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos para tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: white;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Responsividade para telas muito pequenas */
+@media (max-width: 320px) {
+  .text-base {
+    font-size: 14px;
+  }
+  
+  .text-lg {
+    font-size: 16px;
+  }
+  
+  .text-xl {
+    font-size: 18px;
+  }
+}
+
+/* Estilos para impressão */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-before: always;
+  }
+  
+  body {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+}
+
+/* Modo escuro (opcional - para futuras implementações) */
+@media (prefers-color-scheme: dark) {
+  .dark-mode {
+    /* Estilos para modo escuro seriam aplicados aqui */
+  }
+}
+
+/* Estilos para alta resolução */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Estilos para telas de alta resolução */
+  .high-res {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
